@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		59C879C61D2410B000CC7FC2 /* whiterose.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 59C879C51D2410B000CC7FC2 /* whiterose.bundle */; };
 		59CA81401D23AD69004FCC85 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 59CA813F1D23AD69004FCC85 /* main.m */; };
 		59CA81431D23AD69004FCC85 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 59CA81421D23AD69004FCC85 /* AppDelegate.m */; };
 		59CA81461D23AD69004FCC85 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 59CA81451D23AD69004FCC85 /* ViewController.m */; };
@@ -17,6 +18,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		59C879C51D2410B000CC7FC2 /* whiterose.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = whiterose.bundle; sourceTree = "<group>"; };
 		59CA813B1D23AD69004FCC85 /* DAEasterEgg.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DAEasterEgg.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		59CA813F1D23AD69004FCC85 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		59CA81411D23AD69004FCC85 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -73,6 +75,7 @@
 		59CA813E1D23AD69004FCC85 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				59C879C51D2410B000CC7FC2 /* whiterose.bundle */,
 				59CA814F1D23AD69004FCC85 /* Info.plist */,
 				59CA813F1D23AD69004FCC85 /* main.m */,
 			);
@@ -183,6 +186,7 @@
 			files = (
 				59CA814E1D23AD69004FCC85 /* LaunchScreen.storyboard in Resources */,
 				59CA814B1D23AD69004FCC85 /* Assets.xcassets in Resources */,
+				59C879C61D2410B000CC7FC2 /* whiterose.bundle in Resources */,
 				59CA81491D23AD69004FCC85 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -348,6 +352,7 @@
 				59CA81541D23AD69004FCC85 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
