@@ -13,6 +13,7 @@
 		59CA81491D23AD69004FCC85 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 59CA81471D23AD69004FCC85 /* Main.storyboard */; };
 		59CA814B1D23AD69004FCC85 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 59CA814A1D23AD69004FCC85 /* Assets.xcassets */; };
 		59CA814E1D23AD69004FCC85 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 59CA814C1D23AD69004FCC85 /* LaunchScreen.storyboard */; };
+		59CA81571D23AE70004FCC85 /* DAEasterEggViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 59CA81561D23AE70004FCC85 /* DAEasterEggViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -26,6 +27,8 @@
 		59CA814A1D23AD69004FCC85 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		59CA814D1D23AD69004FCC85 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		59CA814F1D23AD69004FCC85 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		59CA81551D23AE70004FCC85 /* DAEasterEggViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DAEasterEggViewController.h; sourceTree = "<group>"; };
+		59CA81561D23AE70004FCC85 /* DAEasterEggViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DAEasterEggViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -58,14 +61,10 @@
 		59CA813D1D23AD69004FCC85 /* DAEasterEgg */ = {
 			isa = PBXGroup;
 			children = (
-				59CA81411D23AD69004FCC85 /* AppDelegate.h */,
-				59CA81421D23AD69004FCC85 /* AppDelegate.m */,
-				59CA81441D23AD69004FCC85 /* ViewController.h */,
-				59CA81451D23AD69004FCC85 /* ViewController.m */,
-				59CA81471D23AD69004FCC85 /* Main.storyboard */,
 				59CA814A1D23AD69004FCC85 /* Assets.xcassets */,
-				59CA814C1D23AD69004FCC85 /* LaunchScreen.storyboard */,
-				59CA814F1D23AD69004FCC85 /* Info.plist */,
+				59CA815A1D23B2E2004FCC85 /* App Delegate */,
+				59CA81591D23B2CF004FCC85 /* Views */,
+				59CA81581D23B2CB004FCC85 /* Controllers */,
 				59CA813E1D23AD69004FCC85 /* Supporting Files */,
 			);
 			path = DAEasterEgg;
@@ -74,9 +73,55 @@
 		59CA813E1D23AD69004FCC85 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				59CA814F1D23AD69004FCC85 /* Info.plist */,
 				59CA813F1D23AD69004FCC85 /* main.m */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		59CA81581D23B2CB004FCC85 /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				59CA815B1D23B349004FCC85 /* Main */,
+				59CA815C1D23B34B004FCC85 /* Easter Egg */,
+			);
+			name = Controllers;
+			sourceTree = "<group>";
+		};
+		59CA81591D23B2CF004FCC85 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				59CA81471D23AD69004FCC85 /* Main.storyboard */,
+				59CA814C1D23AD69004FCC85 /* LaunchScreen.storyboard */,
+			);
+			name = Views;
+			sourceTree = "<group>";
+		};
+		59CA815A1D23B2E2004FCC85 /* App Delegate */ = {
+			isa = PBXGroup;
+			children = (
+				59CA81411D23AD69004FCC85 /* AppDelegate.h */,
+				59CA81421D23AD69004FCC85 /* AppDelegate.m */,
+			);
+			name = "App Delegate";
+			sourceTree = "<group>";
+		};
+		59CA815B1D23B349004FCC85 /* Main */ = {
+			isa = PBXGroup;
+			children = (
+				59CA81441D23AD69004FCC85 /* ViewController.h */,
+				59CA81451D23AD69004FCC85 /* ViewController.m */,
+			);
+			name = Main;
+			sourceTree = "<group>";
+		};
+		59CA815C1D23B34B004FCC85 /* Easter Egg */ = {
+			isa = PBXGroup;
+			children = (
+				59CA81551D23AE70004FCC85 /* DAEasterEggViewController.h */,
+				59CA81561D23AE70004FCC85 /* DAEasterEggViewController.m */,
+			);
+			name = "Easter Egg";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -150,6 +195,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				59CA81461D23AD69004FCC85 /* ViewController.m in Sources */,
+				59CA81571D23AE70004FCC85 /* DAEasterEggViewController.m in Sources */,
 				59CA81431D23AD69004FCC85 /* AppDelegate.m in Sources */,
 				59CA81401D23AD69004FCC85 /* main.m in Sources */,
 			);
@@ -264,6 +310,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = DAEasterEgg/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.darkarmy.DAEasterEgg;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -275,6 +322,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = DAEasterEgg/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.darkarmy.DAEasterEgg;
 				PRODUCT_NAME = "$(TARGET_NAME)";
