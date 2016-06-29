@@ -39,6 +39,8 @@
 @property (nonatomic) CMMotionManager *motionManager;
 
 @property (nonatomic) UILabel *dismissTextLabel;
+@property (nonatomic) UIImageView *animatorImageView;
+//@property (nonatomic) NSLayoutConstraint *animatorImageViewTopConstraint;
 
 @end
 
@@ -69,14 +71,39 @@
 	}];
 }
 
+- (void)viewDidAppear:(BOOL)animated {
+	dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.6 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+		[self animateWhiteRose];
+	});
+}
+
 - (void)viewDidDisappear:(BOOL)animated {
 	[self.motionManager stopAccelerometerUpdates];
+}
+
+- (void)animateWhiteRose {
+	NSMutableArray *images = [NSMutableArray new];
+	self.animatorImageView.image = [UIImage imageNamed:@"whiterose.bundle/WhiteRose.jpg"];
+	for (NSInteger i = 1; i < 18; ++i) {
+		[images addObject:[UIImage imageNamed:[NSString stringWithFormat:@"whiterose.bundle/assets/%.2li", i]]];
+	}
+	self.animatorImageView.animationImages = images;
+	self.animatorImageView.animationDuration = 1.6;
+	self.animatorImageView.animationRepeatCount = 1;
+	[self.animatorImageView startAnimating];
+	[UIView animateWithDuration:0.8 delay:1.8 options:UIViewAnimationOptionCurveEaseInOut animations:^{
+		self.animatorImageView.layer.transform = CATransform3DTranslate(CATransform3DMakeScale(0.16, 0.16, 0.16), self.view.width/.40, -self.view.height/.5, 0);
+		self.animatorImageView.alpha = 0.4;
+	} completion:^(BOOL finished) {
+		
+	}];
 }
 
 #pragma mark - View setup
 
 - (void)setupSubViews {
 	self.view.backgroundColor = [UIColor blackColor];
+	
 	if (!self.dismissTextLabel) {
 		_dismissTextLabel = [[UILabel alloc] initWithFrame:CGRectMake(20, self.view.height - 20, self.view.width - 40, 20)];
 		self.dismissTextLabel.textColor = [UIColor whiteColor];
@@ -87,12 +114,28 @@
 		self.dismissTextLabel.translatesAutoresizingMaskIntoConstraints = NO;
 	}
 	
-	NSDictionary *views = @{@"dismissTextLabel": self.dismissTextLabel};
+	if (!self.animatorImageView) {
+		_animatorImageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"whiterose.bundle/assets/00"]];
+		self.animatorImageView.contentMode = UIViewContentModeScaleAspectFit;
+		self.animatorImageView.clipsToBounds = YES;
+		[self.view addSubview:self.animatorImageView];
+		self.animatorImageView.translatesAutoresizingMaskIntoConstraints = NO;
+	}
+	
+	NSDictionary *views = @{
+							@"dismissTextLabel": self.dismissTextLabel,
+							@"animatorImageView": self.animatorImageView
+							};
 	
 	NSMutableArray *constraints = [NSMutableArray new];
 	
-	[constraints addObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat:@"V:[dismissTextLabel(20)]-0-|" options:0 metrics:nil views:views]];
+	[constraints addObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat:@"V:[animatorImageView]-(>=60)-[dismissTextLabel(20)]-0-|" options:0 metrics:nil views:views]];
 	[constraints addObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-20-[dismissTextLabel]-20-|" options:0 metrics:nil views:views]];
+	
+	[constraints addObject:[NSLayoutConstraint constraintWithItem:self.animatorImageView attribute:NSLayoutAttributeWidth relatedBy:NSLayoutRelationEqual toItem:self.animatorImageView attribute:NSLayoutAttributeHeight multiplier:1 constant:0]];
+	
+	[constraints addObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-(==40)-[animatorImageView(>=240)]-(==40)-|" options:0 metrics:nil views:views]];
+	[constraints addObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-(==120)-[animatorImageView]" options:0 metrics:nil views:views]];
 	
 	[NSLayoutConstraint activateConstraints:constraints];
 }
