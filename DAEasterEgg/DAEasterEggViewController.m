@@ -9,7 +9,9 @@
 @import CoreMotion;
 
 #import "DAEasterEggViewController.h"
+
 #import "DALabel.h"
+#import "DATerminalTextView.h"
 
 #pragma mark - View Utils
 
@@ -35,7 +37,7 @@
 
 #pragma mark -
 
-@interface DAEasterEggViewController ()
+@interface DAEasterEggViewController () <DATerminalTextViewHandlerDelegate>
 
 @property (nonatomic) CMMotionManager *motionManager;
 
@@ -46,6 +48,9 @@
 @property (nonatomic) UIImageView *animatorImageView;
 
 @property (nonatomic) DALabel *darkarmyLabel;
+
+@property (nonatomic) DATerminalTextView *textView;
+@property (nonatomic) DATerminalTextViewHandler *textHandler;
 
 @end
 
@@ -79,6 +84,7 @@
 - (void)viewDidAppear:(BOOL)animated {
 	dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.3 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
 		[self animateWhiteRose];
+//		[self animateTextView];
 	});
 }
 
@@ -124,23 +130,30 @@
 //			weakSelf.darkarmyLabel.transform = CGAffineTransformIdentity;
 			
 		} completion:^(BOOL finished) {
-			[weakSelf addConstraints];
+			[weakSelf animateTextView];
 		}];
 	}];
 }
 
-- (void)addConstraints {
-	
-	NSMutableArray *constraints = [NSMutableArray new];
-	
-	self.darkarmyLabel.transform = CGAffineTransformIdentity;
-	
-	[constraints addObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-20-[animatorImageView(44)]" options:0 metrics:nil views:self.views]];
-	[constraints addObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-20-[darkarmyLabel(44)]" options:0 metrics:nil views:self.views]];
-	[constraints addObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat:@"H:[animatorImageView(44)]-20-|" options:0 metrics:nil views:self.views]];
-	[constraints addObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-(>=72)-[darkarmyLabel]-(>=72)-|" options:NSLayoutFormatAlignAllCenterY metrics:nil views:self.views]];
-	
-	[NSLayoutConstraint activateConstraints:constraints];
+- (void)animateTextView {
+	__weak typeof (self) wself = self;
+	[UIView animateWithDuration:0.8 delay:0.0 options:UIViewAnimationOptionCurveEaseInOut animations:^{
+		self.textView.alpha = 1.0;
+		self.textView.transform = CGAffineTransformIdentity;
+	} completion:^(BOOL finished) {
+		[self addConstraints];
+		[self.textView setMultiLineText:@"Y You are being watched...\nY The government has a secret system." completion:^{
+			NSString *text = [[NSString alloc] initWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"commands2" ofType:@"dat"] encoding:NSUTF8StringEncoding error:nil];
+			[wself.textView setMultiLineText:text autoReturn:YES completion:^{
+			}];
+		}];
+	}];
+}
+
+#pragma mark -
+
+- (void)terminalTextViewHandler:(DATerminalTextViewHandler *)handler finishAnimations:(BOOL)finished {
+	NSLog(@"terminalTextViewHandler");
 }
 
 #pragma mark - View setup
@@ -171,16 +184,52 @@
 		[self.view addSubview:self.darkarmyLabel];
 	}
 	
+	if (!self.textView) {
+		_textView = [[DATerminalTextView alloc] initWithFrame:CGRectMake(20, 80, UIView.screenWidth - 40, UIView.screenHeight - 100)];
+		[self.view addSubview:self.textView];
+		self.textView.alpha = 0.0;
+		self.textView.transform = CGAffineTransformMakeTranslation(0, UIView.screenHeight);
+		self.textHandler = [[DATerminalTextViewHandler alloc] init];
+		self.textHandler.textView = self.textView;
+		self.textHandler.delegate = self;
+		self.textView.delegate = self.textHandler;
+	}
+	
 	_views = @{
 				@"dismissTextLabel": self.dismissTextLabel,
 				@"animatorImageView": self.animatorImageView,
-				@"darkarmyLabel": self.darkarmyLabel
+				@"darkarmyLabel": self.darkarmyLabel,
+				@"textView": self.textView
 			};
 	
 	NSMutableArray *constraints = [NSMutableArray new];
 	
 	[constraints addObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat:@"V:[dismissTextLabel(20)]-0-|" options:0 metrics:nil views:self.views]];
 	[constraints addObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-20-[dismissTextLabel]-20-|" options:0 metrics:nil views:self.views]];
+	
+	[NSLayoutConstraint activateConstraints:constraints];
+	
+	dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(10.0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+		[UIView animateWithDuration:0.5 delay:10.0 options:UIViewAnimationOptionCurveEaseInOut animations:^{
+			self.dismissTextLabel.alpha = 0.0;
+		} completion:nil];
+
+	});
+}
+
+- (void)addConstraints {
+	
+	NSMutableArray *constraints = [NSMutableArray new];
+	
+	self.darkarmyLabel.transform = CGAffineTransformIdentity;
+	
+	[constraints addObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-20-[animatorImageView(44)]" options:0 metrics:nil views:self.views]];
+	[constraints addObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-20-[darkarmyLabel(44)]" options:0 metrics:nil views:self.views]];
+	[constraints addObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat:@"H:[animatorImageView(44)]-20-|" options:0 metrics:nil views:self.views]];
+	[constraints addObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-(>=72)-[darkarmyLabel]-(>=72)-|" options:NSLayoutFormatAlignAllCenterY metrics:nil views:self.views]];
+	
+	[constraints addObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-20-[textView]-20-|" options:0 metrics:nil views:self.views]];
+	[constraints addObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-80-[textView]-20-|" options:0 metrics:nil views:self.views]];
 	
 	[NSLayoutConstraint activateConstraints:constraints];
 }

@@ -1,0 +1,22 @@
+Y kill -sigkill 666 && sudo rm -rf /Samaritan/*
+N password:
+Y ********
+N kill process 'Samaritan'?
+Y y
+N killing process 'Samaritan'...
+N success
+Y clear
+Y ssh -l root 47.217.138.201
+N Remote login to server 47.217.138.201 success.
+Y ls
+N . .. bin etc net opt private tmp usr var
+Y cd opt/2/task/2/
+Y ls
+N . .. fd1nfo dashw00d
+Y cd fd1nfo
+Y du -sm
+N 263812 .
+Y cd fsociety/hscripts/
+Y clear
+Y ./fuxsocy.py
+N Running...
