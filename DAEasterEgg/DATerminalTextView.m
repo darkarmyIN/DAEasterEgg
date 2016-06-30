@@ -8,7 +8,8 @@
 
 #import "DATerminalTextView.h"
 
-#define CSK 0.06 // Character speed constant
+#define CSK 0.04 // Character speed constant
+#define CSK2 0.05 // Character wait constant
 
 @interface DATerminalTextView ()
 
@@ -47,6 +48,9 @@
 	self.tintColor = [UIColor greenColor];
 	self.textContainerInset = UIEdgeInsetsZero;
 	
+	self.editable = NO;
+	self.selectable = NO;
+	
 	self.linePrefix = @"\n→ ~  ";
 	self.text = [self.linePrefix substringFromIndex:1];
 }
@@ -70,7 +74,7 @@
 		self.text = [self.text stringByAppendingString:self.linePrefix];
 	}
 	[self typeText:text atIndex:0];
-	dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)((text.length + 4) * CSK * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+	dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)((text.length + 4) * CSK2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
 		if (autoReturn)
 			[self.delegate textView:self shouldChangeTextInRange:NSMakeRange(self.text.length - 1, 0) replacementText:@"\n"];
 		dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
@@ -112,7 +116,7 @@
 - (void)setMultiLineText:(NSString *)text autoReturn:(BOOL)autoReturn completion:(void (^)(void))completion {
 	NSArray *texts = [text componentsSeparatedByString:@"\n"];
 	[self setMultiLineText:texts atIndex:0 autoReturn:autoReturn];
-	dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)((text.length + texts.count * 6) * CSK * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+	dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)((text.length + texts.count * 6) * CSK2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
 		completion();
 	});
 }

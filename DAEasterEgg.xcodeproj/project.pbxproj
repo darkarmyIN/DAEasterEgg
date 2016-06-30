@@ -10,12 +10,11 @@
 		597F57721D24D35D0051A29C /* DALabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 597F57711D24D35D0051A29C /* DALabel.m */; };
 		597F57731D24DA730051A29C /* Phosphate.ttc in Resources */ = {isa = PBXBuildFile; fileRef = 597F576E1D24D2F50051A29C /* Phosphate.ttc */; };
 		597F577A1D25066F0051A29C /* DATerminalTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = 597F57791D25066F0051A29C /* DATerminalTextView.m */; };
-		597F577C1D254C080051A29C /* commands2.dat in Resources */ = {isa = PBXBuildFile; fileRef = 597F577B1D254C080051A29C /* commands2.dat */; };
+		597F57811D25675A0051A29C /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 597F577F1D25675A0051A29C /* Main.storyboard */; };
 		59C879C61D2410B000CC7FC2 /* whiterose.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 59C879C51D2410B000CC7FC2 /* whiterose.bundle */; };
 		59CA81401D23AD69004FCC85 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 59CA813F1D23AD69004FCC85 /* main.m */; };
 		59CA81431D23AD69004FCC85 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 59CA81421D23AD69004FCC85 /* AppDelegate.m */; };
 		59CA81461D23AD69004FCC85 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 59CA81451D23AD69004FCC85 /* ViewController.m */; };
-		59CA81491D23AD69004FCC85 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 59CA81471D23AD69004FCC85 /* Main.storyboard */; };
 		59CA814B1D23AD69004FCC85 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 59CA814A1D23AD69004FCC85 /* Assets.xcassets */; };
 		59CA814E1D23AD69004FCC85 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 59CA814C1D23AD69004FCC85 /* LaunchScreen.storyboard */; };
 		59CA81571D23AE70004FCC85 /* DAEasterEggViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 59CA81561D23AE70004FCC85 /* DAEasterEggViewController.m */; };
@@ -27,7 +26,7 @@
 		597F57711D24D35D0051A29C /* DALabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DALabel.m; sourceTree = "<group>"; };
 		597F57781D25066F0051A29C /* DATerminalTextView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DATerminalTextView.h; sourceTree = "<group>"; };
 		597F57791D25066F0051A29C /* DATerminalTextView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DATerminalTextView.m; sourceTree = "<group>"; };
-		597F577B1D254C080051A29C /* commands2.dat */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = commands2.dat; sourceTree = "<group>"; };
+		597F57801D25675A0051A29C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		59C879C51D2410B000CC7FC2 /* whiterose.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = whiterose.bundle; sourceTree = "<group>"; };
 		59CA813B1D23AD69004FCC85 /* DAEasterEgg.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DAEasterEgg.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		59CA813F1D23AD69004FCC85 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -35,7 +34,6 @@
 		59CA81421D23AD69004FCC85 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		59CA81441D23AD69004FCC85 /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
 		59CA81451D23AD69004FCC85 /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
-		59CA81481D23AD69004FCC85 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		59CA814A1D23AD69004FCC85 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		59CA814D1D23AD69004FCC85 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		59CA814F1D23AD69004FCC85 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -104,7 +102,6 @@
 			isa = PBXGroup;
 			children = (
 				597F576E1D24D2F50051A29C /* Phosphate.ttc */,
-				597F577B1D254C080051A29C /* commands2.dat */,
 				59C879C51D2410B000CC7FC2 /* whiterose.bundle */,
 				59CA814F1D23AD69004FCC85 /* Info.plist */,
 				59CA813F1D23AD69004FCC85 /* main.m */,
@@ -126,8 +123,8 @@
 			children = (
 				597F57771D2506580051A29C /* Terminal Text View */,
 				597F576F1D24D3430051A29C /* DALabel */,
-				59CA81471D23AD69004FCC85 /* Main.storyboard */,
 				59CA814C1D23AD69004FCC85 /* LaunchScreen.storyboard */,
+				597F577F1D25675A0051A29C /* Main.storyboard */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -216,12 +213,11 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				597F577C1D254C080051A29C /* commands2.dat in Resources */,
 				597F57731D24DA730051A29C /* Phosphate.ttc in Resources */,
+				597F57811D25675A0051A29C /* Main.storyboard in Resources */,
 				59CA814E1D23AD69004FCC85 /* LaunchScreen.storyboard in Resources */,
 				59CA814B1D23AD69004FCC85 /* Assets.xcassets in Resources */,
 				59C879C61D2410B000CC7FC2 /* whiterose.bundle in Resources */,
-				59CA81491D23AD69004FCC85 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -244,10 +240,10 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
-		59CA81471D23AD69004FCC85 /* Main.storyboard */ = {
+		597F577F1D25675A0051A29C /* Main.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
-				59CA81481D23AD69004FCC85 /* Base */,
+				597F57801D25675A0051A29C /* Base */,
 			);
 			name = Main.storyboard;
 			sourceTree = "<group>";

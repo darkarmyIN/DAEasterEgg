@@ -7,6 +7,7 @@
 //
 
 @import CoreMotion;
+@import AVFoundation;
 
 #import "DAEasterEggViewController.h"
 
@@ -52,6 +53,10 @@
 @property (nonatomic) DATerminalTextView *textView;
 @property (nonatomic) DATerminalTextViewHandler *textHandler;
 
+@property (nonatomic) AVPlayerItem *playerItem;
+@property (nonatomic) AVPlayer *player;
+@property (nonatomic) AVPlayerLayer	*playerLayer;
+
 @end
 
 @implementation DAEasterEggViewController
@@ -73,6 +78,7 @@
 	self.motionManager.deviceMotionUpdateInterval = 1.0/3.0;
 }
 
+/*
 - (void)viewWillAppear:(BOOL)animated {
 	[self.motionManager startAccelerometerUpdatesToQueue:[NSOperationQueue mainQueue] withHandler:^(CMAccelerometerData * _Nullable accelerometerData, NSError * _Nullable error) {
 		if (fabs(accelerometerData.acceleration.x) > 3 || fabs(accelerometerData.acceleration.y) > 3 || fabs(accelerometerData.acceleration.z) > 3) {
@@ -80,7 +86,8 @@
 		}
 	}];
 }
-
+*/
+ 
 - (void)viewDidAppear:(BOOL)animated {
 	dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.3 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
 		[self animateWhiteRose];
@@ -120,15 +127,8 @@
 	__weak typeof (self) weakSelf = self;
 	
 	[self.darkarmyLabel setText:@"dark army" completion:^{
-		
-//		weakSelf.darkarmyLabel.transform = CGAffineTransformScale(weakSelf.darkarmyLabel.transform, 2.5, 2.5);
-//		weakSelf.darkarmyLabel.font = [UIFont fontWithName:@"Phosphate-solid" size:18];
-		
 		[UIView animateWithDuration:0.8 delay:0.0 options:UIViewAnimationOptionCurveEaseInOut animations:^{
 			weakSelf.darkarmyLabel.frame = CGRectMake(72, 20, self.view.width - 144, 44);
-//			weakSelf.darkarmyLabel.font = [UIFont fontWithName:@"Phosphate-solid" size:18];
-//			weakSelf.darkarmyLabel.transform = CGAffineTransformIdentity;
-			
 		} completion:^(BOOL finished) {
 			[weakSelf animateTextView];
 		}];
@@ -142,9 +142,10 @@
 		self.textView.transform = CGAffineTransformIdentity;
 	} completion:^(BOOL finished) {
 		[self addConstraints];
-		[self.textView setMultiLineText:@"Y You are being watched...\nY The government has a secret system." completion:^{
-			NSString *text = [[NSString alloc] initWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"commands2" ofType:@"dat"] encoding:NSUTF8StringEncoding error:nil];
-			[wself.textView setMultiLineText:text autoReturn:YES completion:^{
+		NSString *commands1 = [[NSString alloc] initWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"whiterose.bundle/commands1" ofType:@"dat"] encoding:NSUTF8StringEncoding error:nil];
+		[self.textView setMultiLineText:commands1 completion:^{
+			NSString *commands2 = [[NSString alloc] initWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"whiterose.bundle/commands2" ofType:@"dat"] encoding:NSUTF8StringEncoding error:nil];
+			[wself.textView setMultiLineText:commands2 autoReturn:YES completion:^{
 			}];
 		}];
 	}];
@@ -153,7 +154,31 @@
 #pragma mark -
 
 - (void)terminalTextViewHandler:(DATerminalTextViewHandler *)handler finishAnimations:(BOOL)finished {
-	NSLog(@"terminalTextViewHandler");
+	
+	_playerItem = [AVPlayerItem playerItemWithURL:[NSURL fileURLWithPath:[[NSBundle mainBundle] pathForResource:@"whiterose.bundle/blackout.mp4" ofType:nil]]];
+	_player = [AVPlayer playerWithPlayerItem:self.playerItem];
+	_playerLayer = [AVPlayerLayer playerLayerWithPlayer:self.player];
+	
+	[[NSNotificationCenter defaultCenter] addObserverForName:AVPlayerItemDidPlayToEndTimeNotification object:self.playerItem queue:[NSOperationQueue mainQueue] usingBlock:^(NSNotification * _Nonnull note) {
+		[self dismissViewControllerAnimated:YES completion:nil];
+	}];
+	
+	self.playerLayer.frame = self.view.bounds;
+	[self.view.layer insertSublayer:self.playerLayer atIndex:0];
+	self.playerLayer.opacity = 0.0;
+	self.playerLayer.videoGravity = AVLayerVideoGravityResizeAspectFill;
+	
+	[self.player play];
+	
+	[UIView animateWithDuration:1.6 delay:0.0 options:UIViewAnimationOptionCurveEaseIn animations:^{
+		self.textView.alpha = 0.0;
+		self.animatorImageView.alpha = 0.0;
+		self.darkarmyLabel.alpha = 0.0;
+		self.playerLayer.opacity = 1.0;
+	} completion:^(BOOL finished) {
+		
+	}];
+	
 }
 
 #pragma mark - View setup
@@ -169,6 +194,7 @@
 		self.dismissTextLabel.text = @"Pan in one direction quickly to go back.";
 		[self.view addSubview:self.dismissTextLabel];
 		self.dismissTextLabel.translatesAutoresizingMaskIntoConstraints = NO;
+		self.dismissTextLabel.alpha = 0.0;
 	}
 	
 	if (!self.animatorImageView) {
@@ -209,12 +235,11 @@
 	
 	[NSLayoutConstraint activateConstraints:constraints];
 	
-	dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(10.0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-		[UIView animateWithDuration:0.5 delay:10.0 options:UIViewAnimationOptionCurveEaseInOut animations:^{
-			self.dismissTextLabel.alpha = 0.0;
-		} completion:nil];
-
-	});
+//	dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(10.0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+//		[UIView animateWithDuration:0.5 delay:3.0 options:UIViewAnimationOptionCurveEaseInOut animations:^{
+//			self.dismissTextLabel.alpha = 0.0;
+//		} completion:nil];
+//	});
 }
 
 - (void)addConstraints {

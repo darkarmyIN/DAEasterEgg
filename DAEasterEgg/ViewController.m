@@ -28,6 +28,8 @@ typedef struct EasterEggPosition {
 
 @property (nonatomic) CMMotionManager *motionManager;
 
+@property (nonatomic) UILabel *informationLabel;
+
 @end
 
 @implementation ViewController {
@@ -40,10 +42,22 @@ typedef struct EasterEggPosition {
 	self.motionManager = [[CMMotionManager alloc] init];
 	self.motionManager.deviceMotionUpdateInterval = 1.0/3.0;
 	
-	dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.3 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-		DAEasterEggViewController *eevc = [[DAEasterEggViewController alloc] init];
-		[self presentViewController:eevc animated:YES completion:nil];
-	});
+	// Test only
+//	dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.3 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+//		DAEasterEggViewController *eevc = [[DAEasterEggViewController alloc] init];
+//		[self presentViewController:eevc animated:YES completion:nil];
+//	});
+	
+	_informationLabel = [[UILabel alloc] initWithFrame:CGRectInset(self.view.bounds, 20, 20)];
+	self.informationLabel.textColor = [UIColor whiteColor];
+	self.informationLabel.textAlignment = NSTextAlignmentCenter;
+	self.informationLabel.font = [UIFont systemFontOfSize:30 weight:UIFontWeightThin];
+	self.informationLabel.numberOfLines = 0;
+	self.informationLabel.text = @"Do a two-axes pan.\n\nXY, YZ or ZX.";
+	[self.view addSubview:self.informationLabel];
+	
+	[NSLayoutConstraint activateConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-20-[label]-20-|" options:0 metrics:nil views:@{@"label": self.informationLabel}]];
+	[NSLayoutConstraint activateConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-20-[label]-20-|" options:0 metrics:nil views:@{@"label": self.informationLabel}]];
 	
 }
 
@@ -103,7 +117,7 @@ typedef struct EasterEggPosition {
 	
 	[self.motionManager stopAccelerometerUpdates];
 	
-	DAEasterEggViewController *eevc = [self.storyboard instantiateViewControllerWithIdentifier:@"DAEasterEggVC"];
+	DAEasterEggViewController *eevc = [[DAEasterEggViewController alloc] init];
 	
 	if (easterEggController == EasterEggControllerX)
 		eevc.ptype = PresentationTypeXY;

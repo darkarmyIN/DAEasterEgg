@@ -1,75 +1,26 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10117" systemVersion="15F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10117" systemVersion="15F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="4PJ-kn-e8Q">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
-        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
         <!--View Controller-->
-        <scene sceneID="tne-QT-ifu">
+        <scene sceneID="r3J-CM-xXX">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="ViewController" sceneMemberID="viewController">
+                <viewController id="4PJ-kn-e8Q" customClass="ViewController" sceneMemberID="viewController">
                     <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="y3c-jy-aDJ"/>
-                        <viewControllerLayoutGuide type="bottom" id="wfy-db-euE"/>
+                        <viewControllerLayoutGuide type="top" id="djv-jI-ff1"/>
+                        <viewControllerLayoutGuide type="bottom" id="7ie-Am-Qfn"/>
                     </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
+                    <view key="view" contentMode="scaleToFill" id="h1f-75-id9">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OMy-rl-tWd">
-                                <rect key="frame" x="20" y="20" width="560" height="560"/>
-                                <string key="text">Do a two-axes pan.
-
-XY, YZ or ZX.</string>
-                                <fontDescription key="fontDescription" type="system" weight="ultraLight" pointSize="32"/>
-                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                        </subviews>
                         <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
-                        <constraints>
-                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="OMy-rl-tWd" secondAttribute="bottom" constant="20" id="9Vy-3t-zVx"/>
-                            <constraint firstAttribute="leadingMargin" secondItem="OMy-rl-tWd" secondAttribute="leading" id="cB6-bz-oyI"/>
-                            <constraint firstItem="OMy-rl-tWd" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" id="eeY-tf-RFM"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="OMy-rl-tWd" secondAttribute="trailing" id="lr5-Hh-kpQ"/>
-                        </constraints>
                     </view>
                 </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="eMF-c6-aal" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="445" y="437"/>
-        </scene>
-        <!--Easter Egg View Controller-->
-        <scene sceneID="Q3U-3E-h1k">
-            <objects>
-                <viewController storyboardIdentifier="DAEasterEggVC" id="X7j-s2-FD1" customClass="DAEasterEggViewController" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="cBK-wP-aVR"/>
-                        <viewControllerLayoutGuide type="bottom" id="MUh-wN-UOL"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="XR7-wc-FTI">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Shake to go back." textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="z4s-BZ-IRY">
-                                <rect key="frame" x="20" y="580" width="560" height="12"/>
-                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="10"/>
-                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                        </subviews>
-                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
-                        <constraints>
-                            <constraint firstAttribute="leadingMargin" secondItem="z4s-BZ-IRY" secondAttribute="leading" id="BMS-h2-wVw"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="z4s-BZ-IRY" secondAttribute="trailing" id="eyo-MW-b6b"/>
-                            <constraint firstItem="MUh-wN-UOL" firstAttribute="top" secondItem="z4s-BZ-IRY" secondAttribute="bottom" constant="8" id="lyS-ZM-vUL"/>
-                        </constraints>
-                    </view>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="u5d-uV-JVR" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="1267" y="437"/>
+            <point key="canvasLocation" x="499" y="393"/>
         </scene>
     </scenes>
 </document>
