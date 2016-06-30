@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		597F57721D24D35D0051A29C /* DALabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 597F57711D24D35D0051A29C /* DALabel.m */; };
+		597F57731D24DA730051A29C /* Phosphate.ttc in Resources */ = {isa = PBXBuildFile; fileRef = 597F576E1D24D2F50051A29C /* Phosphate.ttc */; };
 		59C879C61D2410B000CC7FC2 /* whiterose.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 59C879C51D2410B000CC7FC2 /* whiterose.bundle */; };
 		59CA81401D23AD69004FCC85 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 59CA813F1D23AD69004FCC85 /* main.m */; };
 		59CA81431D23AD69004FCC85 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 59CA81421D23AD69004FCC85 /* AppDelegate.m */; };
@@ -18,6 +20,9 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		597F576E1D24D2F50051A29C /* Phosphate.ttc */ = {isa = PBXFileReference; lastKnownFileType = file; path = Phosphate.ttc; sourceTree = "<group>"; };
+		597F57701D24D35D0051A29C /* DALabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DALabel.h; sourceTree = "<group>"; };
+		597F57711D24D35D0051A29C /* DALabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DALabel.m; sourceTree = "<group>"; };
 		59C879C51D2410B000CC7FC2 /* whiterose.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = whiterose.bundle; sourceTree = "<group>"; };
 		59CA813B1D23AD69004FCC85 /* DAEasterEgg.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DAEasterEgg.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		59CA813F1D23AD69004FCC85 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -44,6 +49,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		597F576F1D24D3430051A29C /* DALabel */ = {
+			isa = PBXGroup;
+			children = (
+				597F57701D24D35D0051A29C /* DALabel.h */,
+				597F57711D24D35D0051A29C /* DALabel.m */,
+			);
+			name = DALabel;
+			sourceTree = "<group>";
+		};
 		59CA81321D23AD69004FCC85 = {
 			isa = PBXGroup;
 			children = (
@@ -75,6 +89,7 @@
 		59CA813E1D23AD69004FCC85 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				597F576E1D24D2F50051A29C /* Phosphate.ttc */,
 				59C879C51D2410B000CC7FC2 /* whiterose.bundle */,
 				59CA814F1D23AD69004FCC85 /* Info.plist */,
 				59CA813F1D23AD69004FCC85 /* main.m */,
@@ -94,6 +109,7 @@
 		59CA81591D23B2CF004FCC85 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				597F576F1D24D3430051A29C /* DALabel */,
 				59CA81471D23AD69004FCC85 /* Main.storyboard */,
 				59CA814C1D23AD69004FCC85 /* LaunchScreen.storyboard */,
 			);
@@ -184,6 +200,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				597F57731D24DA730051A29C /* Phosphate.ttc in Resources */,
 				59CA814E1D23AD69004FCC85 /* LaunchScreen.storyboard in Resources */,
 				59CA814B1D23AD69004FCC85 /* Assets.xcassets in Resources */,
 				59C879C61D2410B000CC7FC2 /* whiterose.bundle in Resources */,
@@ -198,6 +215,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				597F57721D24D35D0051A29C /* DALabel.m in Sources */,
 				59CA81461D23AD69004FCC85 /* ViewController.m in Sources */,
 				59CA81571D23AE70004FCC85 /* DAEasterEggViewController.m in Sources */,
 				59CA81431D23AD69004FCC85 /* AppDelegate.m in Sources */,

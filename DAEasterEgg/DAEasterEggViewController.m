@@ -9,6 +9,7 @@
 @import CoreMotion;
 
 #import "DAEasterEggViewController.h"
+#import "DALabel.h"
 
 #pragma mark - View Utils
 
@@ -38,9 +39,13 @@
 
 @property (nonatomic) CMMotionManager *motionManager;
 
+@property (nonatomic) NSDictionary *views;
+
 @property (nonatomic) UILabel *dismissTextLabel;
+
 @property (nonatomic) UIImageView *animatorImageView;
-//@property (nonatomic) NSLayoutConstraint *animatorImageViewTopConstraint;
+
+@property (nonatomic) DALabel *darkarmyLabel;
 
 @end
 
@@ -72,7 +77,7 @@
 }
 
 - (void)viewDidAppear:(BOOL)animated {
-	dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.6 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+	dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.3 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
 		[self animateWhiteRose];
 	});
 }
@@ -80,6 +85,8 @@
 - (void)viewDidDisappear:(BOOL)animated {
 	[self.motionManager stopAccelerometerUpdates];
 }
+
+#pragma mark - Animations
 
 - (void)animateWhiteRose {
 	NSMutableArray *images = [NSMutableArray new];
@@ -91,12 +98,49 @@
 	self.animatorImageView.animationDuration = 1.6;
 	self.animatorImageView.animationRepeatCount = 1;
 	[self.animatorImageView startAnimating];
+	
 	[UIView animateWithDuration:0.8 delay:1.8 options:UIViewAnimationOptionCurveEaseInOut animations:^{
-		self.animatorImageView.layer.transform = CATransform3DTranslate(CATransform3DMakeScale(0.16, 0.16, 0.16), self.view.width/.40, -self.view.height/.5, 0);
-		self.animatorImageView.alpha = 0.4;
-	} completion:^(BOOL finished) {
 		
+		self.animatorImageView.frame = CGRectMake(self.view.width - 64, 20, 44, 44);
+		self.animatorImageView.alpha = 0.6;
+		
+	} completion:^(BOOL finished) {
+		[self animateDarkArmyLabel];
 	}];
+}
+
+- (void)animateDarkArmyLabel {
+	
+	__weak typeof (self) weakSelf = self;
+	
+	[self.darkarmyLabel setText:@"dark army" completion:^{
+		
+//		weakSelf.darkarmyLabel.transform = CGAffineTransformScale(weakSelf.darkarmyLabel.transform, 2.5, 2.5);
+//		weakSelf.darkarmyLabel.font = [UIFont fontWithName:@"Phosphate-solid" size:18];
+		
+		[UIView animateWithDuration:0.8 delay:0.0 options:UIViewAnimationOptionCurveEaseInOut animations:^{
+			weakSelf.darkarmyLabel.frame = CGRectMake(72, 20, self.view.width - 144, 44);
+//			weakSelf.darkarmyLabel.font = [UIFont fontWithName:@"Phosphate-solid" size:18];
+//			weakSelf.darkarmyLabel.transform = CGAffineTransformIdentity;
+			
+		} completion:^(BOOL finished) {
+			[weakSelf addConstraints];
+		}];
+	}];
+}
+
+- (void)addConstraints {
+	
+	NSMutableArray *constraints = [NSMutableArray new];
+	
+	self.darkarmyLabel.transform = CGAffineTransformIdentity;
+	
+	[constraints addObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-20-[animatorImageView(44)]" options:0 metrics:nil views:self.views]];
+	[constraints addObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-20-[darkarmyLabel(44)]" options:0 metrics:nil views:self.views]];
+	[constraints addObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat:@"H:[animatorImageView(44)]-20-|" options:0 metrics:nil views:self.views]];
+	[constraints addObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-(>=72)-[darkarmyLabel]-(>=72)-|" options:NSLayoutFormatAlignAllCenterY metrics:nil views:self.views]];
+	
+	[NSLayoutConstraint activateConstraints:constraints];
 }
 
 #pragma mark - View setup
@@ -115,27 +159,28 @@
 	}
 	
 	if (!self.animatorImageView) {
-		_animatorImageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"whiterose.bundle/assets/00"]];
+		CGFloat width = MIN(self.view.width - 80, self.view.height - 80);
+		_animatorImageView = [[UIImageView alloc] initWithFrame:CGRectMake(40, (self.view.height - width)/2, width, width)];
 		self.animatorImageView.contentMode = UIViewContentModeScaleAspectFit;
 		self.animatorImageView.clipsToBounds = YES;
 		[self.view addSubview:self.animatorImageView];
-		self.animatorImageView.translatesAutoresizingMaskIntoConstraints = NO;
 	}
 	
-	NSDictionary *views = @{
-							@"dismissTextLabel": self.dismissTextLabel,
-							@"animatorImageView": self.animatorImageView
-							};
+	if (!self.darkarmyLabel) {
+		_darkarmyLabel = [[DALabel alloc] initWithFrame:CGRectMake(72, self.view.height/2 - 20, self.view.width - 144, 40)];
+		[self.view addSubview:self.darkarmyLabel];
+	}
+	
+	_views = @{
+				@"dismissTextLabel": self.dismissTextLabel,
+				@"animatorImageView": self.animatorImageView,
+				@"darkarmyLabel": self.darkarmyLabel
+			};
 	
 	NSMutableArray *constraints = [NSMutableArray new];
 	
-	[constraints addObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat:@"V:[animatorImageView]-(>=60)-[dismissTextLabel(20)]-0-|" options:0 metrics:nil views:views]];
-	[constraints addObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-20-[dismissTextLabel]-20-|" options:0 metrics:nil views:views]];
-	
-	[constraints addObject:[NSLayoutConstraint constraintWithItem:self.animatorImageView attribute:NSLayoutAttributeWidth relatedBy:NSLayoutRelationEqual toItem:self.animatorImageView attribute:NSLayoutAttributeHeight multiplier:1 constant:0]];
-	
-	[constraints addObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-(==40)-[animatorImageView(>=240)]-(==40)-|" options:0 metrics:nil views:views]];
-	[constraints addObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-(==120)-[animatorImageView]" options:0 metrics:nil views:views]];
+	[constraints addObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat:@"V:[dismissTextLabel(20)]-0-|" options:0 metrics:nil views:self.views]];
+	[constraints addObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-20-[dismissTextLabel]-20-|" options:0 metrics:nil views:self.views]];
 	
 	[NSLayoutConstraint activateConstraints:constraints];
 }
